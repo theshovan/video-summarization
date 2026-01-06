@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video to Text Summarizer | AI-Powered Transcription</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="hero-section">
+            <div class="hero-content">
+                <div class="logo">
+                    <div class="logo-icon">🎬</div>
+                    <h1>VideoTranscribe<span class="ai-badge">AI</span></h1>
+                </div>
+                <h2 class="hero-title">Transform Videos into <span class="highlight">Multilingual Text</span></h2>
+                <p class="hero-subtitle">Upload any video or audio file and get instant transcriptions in English & Bengali with AI-powered summaries</p>
+                
+                <div class="feature-highlights">
+                    <div class="feature">
+                        <span class="feature-icon">🔊</span>
+                        <span>Speech to Text</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🌐</span>
+                        <span>Multi-language</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">📝</span>
+                        <span>Smart Summaries</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">⚡</span>
+                        <span>Fast Processing</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Upload Section -->
+        <main class="main-content">
+            <div class="upload-card">
+                <div class="card-header">
+                    <h3>Start Converting</h3>
+                    <p>Drag & drop or choose your file</p>
+                </div>
+
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <div class="upload-icon-wrapper">
+                                <div class="upload-icon">📁</div>
+                                <div class="upload-pulse"></div>
+                            </div>
+                            <h3>Choose Video/Audio File</h3>
+                            <p>Supported formats: MP4, AVI, MOV, MP3, WAV</p>
+                            <div class="file-types">
+                                <span class="file-type-tag">MP4</span>
+                                <span class="file-type-tag">AVI</span>
+                                <span class="file-type-tag">MOV</span>
+                                <span class="file-type-tag">MP3</span>
+                                <span class="file-type-tag">WAV</span>
+                            </div>
+                            <p class="file-size-info">📏 Max size: 50MB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="controls-section">
+                        <div class="language-selection">
+                            <label for="languageSelect">
+                                <span class="label-icon">🌍</span>
+                                Select Audio Language:
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="languageSelect">
+                                    <option value="en-IN">🇺🇸 English</option>
+                                    <option value="hi-IN">🇮🇳 Hindi</option>
+                                </select>
+                                <div class="select-arrow">▼</div>
+                            </div>
+                        </div>
+
+                        <div class="file-input-container">
+                            <input type="file" id="fileInput" accept=".mp4,.avi,.mov,.wmv,.flv,.webm,.mkv,.mp3,.wav">
+                            <button class="btn btn-primary" id="browseButton">
+                                <span class="btn-icon">📂</span>
+                                Browse Files
+                            </button>
+                            <span id="fileName" class="file-name">
+                                <span class="file-icon">📄</span>
+                                <span class="file-text">No file chosen</span>
+                            </span>
+                        </div>
+
+                        <button class="btn btn-summarize" id="summarizeButton" disabled>
+                            <span class="btn-icon">🚀</span>
+                            Convert & Translate
+                            <span class="btn-badge">AI</span>
+                        </button>
+                    </div>
+                    
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <div class="progress-header">
+                            <span class="progress-icon">⏳</span>
+                            <span>Processing your file...</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                            <div class="progress-glow"></div>
+                        </div>
+                        <p id="progressText">This may take a while for longer videos</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2>🎉 Conversion Complete!</h2>
+                    <div class="results-info">
+                        <p id="detectedLanguage" class="language-info"></p>
+                        <p id="textLength" class="text-length-info"></p>
+                        <p id="summaryStatus" class="summary-status"></p>
+                    </div>
+                </div>
+                
+                <div class="results-container">
+                    <!-- Original Text -->
+                    <div class="result-column">
+                        <div class="column-header">
+                            <span class="column-icon">📝</span>
+                            <h3>Original Text</h3>
+                        </div>
+                        <div class="result-card">
+                            <div class="card-label">
+                                <span class="label-icon">🔤</span>
+                                Full Transcription
+                            </div>
+                            <div class="text-content full-text" id="originalText"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- English -->
+                    <div class="result-column">
+                        <div class="column-header">
+                            <span class="column-icon">🇺🇸</span>
+                            <h3>English</h3>
+                        </div>
+                        <div class="result-card">
+                            <div class="card-label">
+                                <span class="label-icon">📖</span>
+                                Full Translation
+                            </div>
+                            <div class="text-content full-text" id="englishFullText"></div>
+                        </div>
+                        <div class="result-card">
+                            <div class="card-label">
+                                <span class="label-icon">📋</span>
+                                AI Summary
+                            </div>
+                            <div class="text-content summary-text" id="englishSummary"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bengali -->
+                    <div class="result-column">
+                        <div class="column-header">
+                            <span class="column-icon">🇧🇩</span>
+                            <h3>Bengali</h3>
+                        </div>
+                        <div class="result-card">
+                            <div class="card-label">
+                                <span class="label-icon">📖</span>
+                                Full Translation
+                            </div>
+                            <div class="text-content full-text bengali-text" id="bengaliFullText"></div>
+                        </div>
+                        <div class="result-card">
+                            <div class="card-label">
+                                <span class="label-icon">📋</span>
+                                AI Summary
+                            </div>
+                            <div class="text-content summary-text bengali-text" id="bengaliSummary"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="window.location.reload()">
+                        <span class="btn-icon">🔄</span>
+                        Convert Another File
+                    </button>
+                </div>
+            </div>
+
+            <!-- Error Section -->
+            <div class="error-section" id="errorSection" style="display: none;">
+                <div class="error-card">
+                    <div class="error-icon">⚠️</div>
+                    <h3>Oops! Something went wrong</h3>
+                    <div class="error-message" id="errorMessage"></div>
+                    <button class="btn btn-primary" onclick="hideError()">
+                        <span class="btn-icon">🔄</span>
+                        Try Again
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with ❤️ using AI Technology | Video to Text Summarizer</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        function hideError() {
+            document.getElementById('errorSection').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
