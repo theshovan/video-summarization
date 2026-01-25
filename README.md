@@ -4,7 +4,7 @@
 
 # 🎥 Multilingual Video Transcription Summarization Using AI  
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/Framework-PyTorch%20%7C%20TensorFlow-orange?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg?style=for-the-badge)](https://github.com/theshovan/video-summarization/graphs/commit-activity)
@@ -64,7 +64,7 @@ Whether you are a student trying to summarize a lecture, a professional reviewin
 Follow these steps to set up the project locally.
 
 ### Prerequisites
-* Python 3.8 or higher
+* Python 3.10 or higher
 * FFmpeg (for audio/video processing)
 
 ### Installation
